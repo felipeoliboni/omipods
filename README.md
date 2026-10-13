@@ -1,7 +1,7 @@
-# Omarchy Redmi Buds
+# Omipods
 
-Per-earbud and case battery — plus an ANC/transparency switch — for Redmi
-Buds, right in the [Omarchy](https://omarchy.org/) status bar.
+Per-earbud and case battery — plus an ANC/transparency switch — for Redmi/
+Xiaomi earbuds, right in the [Omarchy](https://omarchy.org/) status bar.
 
 Unlike the battery percentage BlueZ already exposes for most Bluetooth
 headsets (a single combined number), this plugin talks the earbuds' own
@@ -55,8 +55,8 @@ its stdout.
 ## Installation
 
 ```bash
-git clone https://github.com/felipeoliboni/omarchy-redmibuds.git \
-  ~/.config/omarchy/plugins/io.github.felipeoliboni.omarchy-redmibuds
+git clone https://github.com/felipeoliboni/omipods.git \
+  ~/.config/omarchy/plugins/io.github.felipeoliboni.omipods
 omarchy-shell shell rescanPlugins
 ```
 
@@ -65,7 +65,7 @@ or by adding it to `~/.config/omarchy/shell.json`:
 
 ```json
 {
-  "id": "io.github.felipeoliboni.omarchy-redmibuds",
+  "id": "io.github.felipeoliboni.omipods",
   "address": "AA:BB:CC:DD:EE:FF"
 }
 ```
@@ -106,6 +106,19 @@ Channel `29` corresponds to the Xiaomi vendor control service (SIG-assigned
 UUID `0000fd2d-...`) and has been consistent across the devices this was
 tested on.
 
+## Compatible devices
+
+| Device                          | Status                                                                 |
+|----------------------------------|-------------------------------------------------------------------------|
+| Redmi Buds 6 Lite                | ✅ Confirmed — personally tested, battery and the ANC switch both work   |
+| Redmi Buds 5 Pro                 | 🟡 Likely — this plugin's protocol is a direct port of Gadgetbridge's Redmi Buds 5 Pro support, but it hasn't been retested here against that model |
+| Redmi Buds 6 / 6 Play / 6 Pro     | ❓ Untested — same product generation as the 6 Lite, may share firmware, unconfirmed |
+| Other Redmi/Xiaomi earbuds        | ❓ Untested — Gadgetbridge supports several other models (3 Pro, 4 Active, 8 Active) through a *different* internal protocol, so compatibility here isn't guaranteed |
+
+If you try it on a model that isn't listed as confirmed, please open an
+issue with the result (worked / didn't connect / connected but no battery /
+etc.) — happy to expand this table.
+
 ## Known limitations
 
 - The earbuds don't acknowledge the ANC/transparency command, so the popup
@@ -118,8 +131,6 @@ tested on.
   up here yet).
 - Case battery reads as unavailable whenever a bud isn't in the case — that
   is the device's own `0xFF` "not applicable" sentinel, not a bug.
-- Tested against one Redmi Buds 6 Lite unit. Firmware differences between
-  units/regions could behave differently.
 
 ## Credits
 

@@ -6,8 +6,8 @@ import qs.Ui
 
 Panel {
   id: root
-  moduleName: "io.github.felipeoliboni.omarchy-redmibuds"
-  ipcTarget: "io.github.felipeoliboni.omarchy-redmibuds"
+  moduleName: "io.github.felipeoliboni.omipods"
+  ipcTarget: "io.github.felipeoliboni.omipods"
 
   readonly property string address: setting("address", "")
   readonly property int channel: Number(setting("channel", 29))
@@ -43,7 +43,8 @@ Panel {
 
   // Optimistic local selection only — the earbuds don't ack this command,
   // so this reflects "last mode we sent", not a confirmed device readback.
-  property int ancMode: -1
+  // Defaults to Off since that's the earbuds' own power-on default.
+  property int ancMode: 0
 
   function sendAncMode(mode) {
     root.ancMode = mode
@@ -97,42 +98,40 @@ Panel {
     anchors.fill: parent
     bar: root.bar
     slotSize: Style.bar.statusSlot
-    active: root.connected
+    useActiveColor: false
     tooltipText: root.address === "" ? "Redmi Buds: set the MAC address in plugin settings"
       : (root.connected ? ("Redmi Buds · " + root.barLabel) : "Redmi Buds: disconnected")
     onPressed: function(b) { root.toggle() }
 
+    // Single earbud in side profile (AirPods-style silhouette): a rounded
+    // "bud" sitting in the ear with a thin stem angled down and away from it.
     iconComponent: Component {
       Item {
-        implicitWidth: 16
-        implicitHeight: 16
-        readonly property color iconColor: button.active && button.useActiveColor ? button.activeColor : button.foreground
+        implicitWidth: 17
+        implicitHeight: 17
+        readonly property color iconColor: button.foreground
+        opacity: root.connected ? 1.0 : 0.45
 
-        Row {
-          anchors.centerIn: parent
-          spacing: 3
+        Rectangle {
+          width: 8
+          height: 10
+          radius: 4
+          color: iconColor
+          x: 3
+          y: 1
+          rotation: -20
+          transformOrigin: Item.Center
+        }
 
-          Repeater {
-            model: 2
-            delegate: Column {
-              spacing: 0
-              Rectangle {
-                width: 7
-                height: 7
-                radius: 3.5
-                color: iconColor
-                anchors.horizontalCenter: parent.horizontalCenter
-              }
-              Rectangle {
-                width: 2
-                height: 8
-                radius: 1
-                color: iconColor
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.horizontalCenterOffset: index === 0 ? -1 : 1
-              }
-            }
-          }
+        Rectangle {
+          width: 3
+          height: 8
+          radius: 1.5
+          color: iconColor
+          x: 9
+          y: 7
+          rotation: 28
+          transformOrigin: Item.Top
         }
       }
     }
