@@ -55,10 +55,10 @@ its stdout.
 ## Installation
 
 ```bash
-git clone https://github.com/felipeoliboni/omipods.git \
-  ~/.config/omarchy/plugins/omipods
-omarchy-shell shell rescanPlugins
+omarchy plugin add https://github.com/felipeoliboni/omipods.git --enable
 ```
+
+(or clone it manually: `git clone https://github.com/felipeoliboni/omipods.git ~/.config/omarchy/plugins/omipods && omarchy-shell shell rescanPlugins`)
 
 Then add the widget to your bar — either through Omarchy's bar settings UI,
 or by adding it to `~/.config/omarchy/shell.json`:
