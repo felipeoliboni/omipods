@@ -211,8 +211,7 @@ Panel {
           Repeater {
             model: [
               { label: "Left", battery: root.leftBattery },
-              { label: "Right", battery: root.rightBattery },
-              { label: "Case", battery: root.caseBattery }
+              { label: "Right", battery: root.rightBattery }
             ]
 
             delegate: Item {
@@ -235,7 +234,7 @@ Panel {
                 id: rowStatus
                 textFormat: Text.PlainText
                 text: !modelData.battery
-                  ? (modelData.label === "Case" ? "not in case" : "—")
+                  ? "—"
                   : root.percentText(modelData.battery) + (modelData.battery.charging ? " ⚡" : "")
                 color: root.bar ? root.bar.foreground : Color.foreground
                 font.family: root.bar ? root.bar.fontFamily : Style.font.family
