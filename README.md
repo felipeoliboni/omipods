@@ -52,7 +52,8 @@ its stdout.
 - Omarchy with the Quickshell-based shell
 - The earbuds already paired and trusted via BlueZ (`bluetoothctl pair` /
   `bluetoothctl trust`) — this plugin does not handle pairing
-- Python 3 (stdlib only, nothing to install)
+- Python 3 and `bluetoothctl` (BlueZ) on `PATH` — both already present on a
+  stock Omarchy install, nothing extra to install
 
 ## Installation
 
@@ -71,6 +72,15 @@ or by adding it to `~/.config/omarchy/shell.json`:
   "address": "AA:BB:CC:DD:EE:FF"
 }
 ```
+
+## Removal
+
+```bash
+omarchy plugin remove omipods
+```
+
+(or manually: remove its entry from `~/.config/omarchy/shell.json`, delete
+`~/.config/omarchy/plugins/omipods`, then `omarchy-shell shell rescanPlugins`)
 
 ## Configuration
 
