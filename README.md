@@ -56,7 +56,7 @@ its stdout.
 
 ```bash
 git clone https://github.com/felipeoliboni/omipods.git \
-  ~/.config/omarchy/plugins/io.github.felipeoliboni.omipods
+  ~/.config/omarchy/plugins/omipods
 omarchy-shell shell rescanPlugins
 ```
 
@@ -65,7 +65,7 @@ or by adding it to `~/.config/omarchy/shell.json`:
 
 ```json
 {
-  "id": "io.github.felipeoliboni.omipods",
+  "id": "omipods",
   "address": "AA:BB:CC:DD:EE:FF"
 }
 ```

@@ -315,7 +315,13 @@ def main():
     def emit():
         try:
             info = read_once(args.address, args.channel)
-        except OSError:
+        except Exception:
+            # Anything goes here, not just connection errors: a disconnect
+            # mid-handshake can hand us a truncated packet, and a malformed
+            # packet can throw from deep inside decode()/the auth cipher.
+            # This loop must never die from that — it just means "couldn't
+            # read this cycle," which is exactly what "not connected" means
+            # to the widget.
             info = None
         out = {"connected": info is not None}
         if info is not None:
@@ -327,7 +333,10 @@ def main():
         return
 
     while True:
-        emit()
+        try:
+            emit()
+        except Exception:
+            pass
         time.sleep(args.loop)
 
 
