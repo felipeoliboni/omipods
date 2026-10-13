@@ -73,14 +73,14 @@ or by adding it to `~/.config/omarchy/shell.json`:
 }
 ```
 
-## Removal
+## Remove
 
 ```bash
 omarchy plugin remove omipods
 ```
 
-(or manually: remove its entry from `~/.config/omarchy/shell.json`, delete
-`~/.config/omarchy/plugins/omipods`, then `omarchy-shell shell rescanPlugins`)
+That deletes `~/.config/omarchy/plugins/omipods/` and drops the widget from
+the bar. Nothing else on your system is touched.
 
 ## Configuration
 
