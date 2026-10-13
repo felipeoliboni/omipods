@@ -24,6 +24,7 @@ import json
 import os
 import socket
 import struct
+import subprocess
 import sys
 import time
 
@@ -295,6 +296,32 @@ def set_anc_mode(addr, channel, mode, timeout=8.0):
         s.close()
 
 
+def is_bluez_connected(addr):
+    """Whether BlueZ itself considers this device connected.
+
+    This matters because the Xiaomi vendor control channel (what read_once()
+    actually talks to) is a separate RFCOMM service from the main
+    audio/profile connection. It can stay reachable -- and hand back a
+    perfectly good, if stale, battery reading -- even after the earbuds have
+    been disconnected from BlueZ's point of view (e.g. via the system
+    Bluetooth menu, or the case lid closing the audio link while the control
+    channel still answers). Gating on BlueZ's own state keeps "connected" in
+    this widget matching what the user sees everywhere else on the system.
+    """
+    try:
+        out = subprocess.run(
+            ["bluetoothctl", "info", addr],
+            capture_output=True, text=True, timeout=5,
+        ).stdout
+    except (OSError, subprocess.SubprocessError):
+        return False
+    for line in out.splitlines():
+        line = line.strip()
+        if line.startswith("Connected:"):
+            return line.split(":", 1)[1].strip().lower() == "yes"
+    return False
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("address")
@@ -313,16 +340,18 @@ def main():
         return
 
     def emit():
-        try:
-            info = read_once(args.address, args.channel)
-        except Exception:
-            # Anything goes here, not just connection errors: a disconnect
-            # mid-handshake can hand us a truncated packet, and a malformed
-            # packet can throw from deep inside decode()/the auth cipher.
-            # This loop must never die from that — it just means "couldn't
-            # read this cycle," which is exactly what "not connected" means
-            # to the widget.
-            info = None
+        info = None
+        if is_bluez_connected(args.address):
+            try:
+                info = read_once(args.address, args.channel)
+            except Exception:
+                # Anything goes here, not just connection errors: a disconnect
+                # mid-handshake can hand us a truncated packet, and a malformed
+                # packet can throw from deep inside decode()/the auth cipher.
+                # This loop must never die from that — it just means "couldn't
+                # read this cycle," which is exactly what "not connected" means
+                # to the widget.
+                info = None
         out = {"connected": info is not None}
         if info is not None:
             out.update(info)
