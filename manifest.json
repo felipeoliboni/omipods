@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.felipeoliboni.omarchy-redmibuds",
+  "name": "Redmi Buds Battery",
+  "version": "0.1.0",
+  "author": "Felipe Oliboni",
+  "license": "AGPL-3.0",
+  "description": "Per-earbud and case battery (and an experimental ANC mode switch) for Redmi Buds, in the Omarchy status bar.",
+  "kinds": ["bar-widget"],
+  "entryPoints": {
+    "barWidget": "RedmiBuds.qml"
+  },
+  "barWidget": {
+    "displayName": "Redmi Buds",
+    "description": "Left/right earbud and case battery, read over the Xiaomi earbuds RFCOMM control channel.",
+    "category": "Devices",
+    "aliases": ["redmibuds", "earbuds", "xiaomi", "bluetooth-battery"],
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "address": "",
+      "channel": 29,
+      "pollInterval": 30
+    },
+    "schema": [
+      {
+        "key": "address",
+        "type": "string",
+        "label": "Bluetooth MAC address of the earbuds"
+      },
+      {
+        "key": "channel",
+        "type": "integer",
+        "label": "RFCOMM control channel",
+        "min": 1,
+        "max": 30,
+        "defaultValue": 29
+      },
+      {
+        "key": "pollInterval",
+        "type": "integer",
+        "label": "Refresh interval (seconds)",
+        "min": 10,
+        "max": 300,
+        "step": 5,
+        "defaultValue": 30
+      }
+    ]
+  }
+}
