@@ -1,17 +1,17 @@
 # Omipods
 
-Per-earbud and case battery — plus an ANC/transparency switch — for Redmi/
-Xiaomi earbuds, right in the [Omarchy](https://omarchy.org/) status bar.
+Per-earbud battery — plus an ANC/transparency switch — for Redmi/Xiaomi
+earbuds, right in the [Omarchy](https://omarchy.org/) status bar.
 
 Unlike the battery percentage BlueZ already exposes for most Bluetooth
 headsets (a single combined number), this plugin talks the earbuds' own
 Xiaomi control protocol directly over a classic-Bluetooth RFCOMM channel, so
-it can show the **left bud, right bud, and case** separately — the same kind
-of detail AirPods-focused bar widgets show for Apple's earbuds.
+it can show the **left and right bud** separately — the same kind of detail
+AirPods-focused bar widgets show for Apple's earbuds.
 
 ## Features
 
-- Left / right / case battery percentage and charging state
+- Left / right battery percentage and charging state
 - Bar icon that reflects connection state
 - Popup panel (click the bar icon) with per-component battery bars
 - Listening-mode switch: Off / Transparency / Noise Cancellation
@@ -129,8 +129,9 @@ etc.) — happy to expand this table.
   comments in `RedmiBuds.qml` if you need to flip it back for yours).
 - No wearing/ear-detection state (the protocol does push it, just not wired
   up here yet).
-- Case battery reads as unavailable whenever a bud isn't in the case — that
-  is the device's own `0xFF` "not applicable" sentinel, not a bug.
+- The case has its own battery level over this protocol too, but it only
+  reports a real number while a bud is actually in the case, so it's left
+  out of the popup for now rather than showing "n/a" most of the time.
 
 ## Credits
 
