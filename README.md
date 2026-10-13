@@ -61,14 +61,14 @@ its stdout.
 omarchy plugin add https://github.com/felipeoliboni/omipods.git --enable
 ```
 
-(or clone it manually: `git clone https://github.com/felipeoliboni/omipods.git ~/.config/omarchy/plugins/omipods && omarchy-shell shell rescanPlugins`)
+(or clone it manually: `git clone https://github.com/felipeoliboni/omipods.git ~/.config/omarchy/plugins/foliboni.omipods && omarchy-shell shell rescanPlugins`)
 
 Then add the widget to your bar — either through Omarchy's bar settings UI,
 or by adding it to `~/.config/omarchy/shell.json`:
 
 ```json
 {
-  "id": "omipods",
+  "id": "foliboni.omipods",
   "address": "AA:BB:CC:DD:EE:FF"
 }
 ```
@@ -76,11 +76,11 @@ or by adding it to `~/.config/omarchy/shell.json`:
 ## Remove
 
 ```bash
-omarchy plugin remove omipods
+omarchy plugin remove foliboni.omipods
 ```
 
-That deletes `~/.config/omarchy/plugins/omipods/` and drops the widget from
-the bar. Nothing else on your system is touched.
+That deletes `~/.config/omarchy/plugins/foliboni.omipods/` and drops the
+widget from the bar. Nothing else on your system is touched.
 
 ## Configuration
 

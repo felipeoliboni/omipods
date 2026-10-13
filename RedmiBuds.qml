@@ -6,8 +6,8 @@ import qs.Ui
 
 Panel {
   id: root
-  moduleName: "omipods"
-  ipcTarget: "omipods"
+  moduleName: "foliboni.omipods"
+  ipcTarget: "foliboni.omipods"
 
   readonly property string address: setting("address", "")
   readonly property int channel: Number(setting("channel", 29))
