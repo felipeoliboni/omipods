@@ -337,16 +337,6 @@ Panel {
             }
           }
         }
-
-        Text {
-          textFormat: Text.PlainText
-          text: "Experimental: sent over the Redmi Buds 5 Pro protocol: not confirmed to physically change noise filtering on the 6 Lite."
-          wrapMode: Text.WordWrap
-          width: parent.width
-          color: Qt.darker(root.bar ? root.bar.foreground : Color.foreground, 1.5)
-          font.family: root.bar ? root.bar.fontFamily : Style.font.family
-          font.pixelSize: Style.font.caption
-        }
       }
     }
   }

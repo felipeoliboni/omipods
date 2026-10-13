@@ -1,7 +1,7 @@
 # Omarchy Redmi Buds
 
-Per-earbud and case battery — plus an experimental ANC/transparency switch —
-for Redmi Buds, right in the [Omarchy](https://omarchy.org/) status bar.
+Per-earbud and case battery — plus an ANC/transparency switch — for Redmi
+Buds, right in the [Omarchy](https://omarchy.org/) status bar.
 
 Unlike the battery percentage BlueZ already exposes for most Bluetooth
 headsets (a single combined number), this plugin talks the earbuds' own
@@ -14,7 +14,7 @@ of detail AirPods-focused bar widgets show for Apple's earbuds.
 - Left / right / case battery percentage and charging state
 - Bar icon that reflects connection state
 - Popup panel (click the bar icon) with per-component battery bars
-- Experimental listening-mode switch: Off / Transparency / Noise Cancellation
+- Listening-mode switch: Off / Transparency / Noise Cancellation
 
 ## How it works
 
@@ -108,12 +108,12 @@ tested on.
 
 ## Known limitations
 
-- **ANC/Transparency is experimental.** The earbuds don't acknowledge this
-  command, so the popup shows "last mode sent," not a confirmed device
-  state — and the wire byte that means "Transparency" vs. "Noise
-  Cancellation" isn't guaranteed to match the official Xiaomi app's own
-  convention on every unit (it was swapped on the one this was tested
-  against). Listen for yourself after switching.
+- The earbuds don't acknowledge the ANC/transparency command, so the popup
+  shows "last mode sent," not a confirmed device readback.
+- The wire byte that means "Transparency" vs. "Noise Cancellation" isn't
+  guaranteed to match the official Xiaomi app's own convention on every
+  unit (it was swapped on the one this was tested against — see the
+  comments in `RedmiBuds.qml` if you need to flip it back for yours).
 - No wearing/ear-detection state (the protocol does push it, just not wired
   up here yet).
 - Case battery reads as unavailable whenever a bud isn't in the case — that

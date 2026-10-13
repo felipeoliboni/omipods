@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "Felipe Oliboni",
   "license": "AGPL-3.0",
-  "description": "Per-earbud and case battery (and an experimental ANC mode switch) for Redmi Buds, in the Omarchy status bar.",
+  "description": "Per-earbud and case battery, plus an ANC/transparency mode switch, for Redmi Buds, in the Omarchy status bar.",
   "kinds": ["bar-widget"],
   "entryPoints": {
     "barWidget": "RedmiBuds.qml"
