@@ -9,6 +9,8 @@ Xiaomi control protocol directly over a classic-Bluetooth RFCOMM channel, so
 it can show the **left and right bud** separately — the same kind of detail
 AirPods-focused bar widgets show for Apple's earbuds.
 
+![Omipods popup](preview.png)
+
 ## Features
 
 - Left / right battery percentage and charging state
